@@ -34,7 +34,7 @@ We will have following pages:
 
 * How will it streamline or improve the current process or facilitate a new process?
 * This product is aimed at the digital industry. Product teams, companies specializing in organizing online events, conferences can use this application as the main tool for their activities.
-* 
+
 
 ## User Personas
 *Write description of user personas here*  
