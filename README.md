@@ -1,21 +1,21 @@
 # CSS 410 Research tools and methods
 ## Team members
-+ **Nurali Ainabekov** (*180103154*)- Project Manager (GitHub account: *jetlee*)
-+ **Azhar Ilyassova** (*180103181*) - Frontend Developer (GitHub account: *jackychan*)
-+ **Nazerke Nazarkulova** (*180103181*) - Frontend Developer (GitHub account: *jackychan*)
-+ **Toty Kabasheva** (*180103181*) - UX/UI Designer (GitHub account: *jackychan*)
++ **Nurali Ainabekov** (*180103154*)- Project Manager (GitHub account: *NuRalli*)
++ **Azhar Ilyassova** (*180103181*) - Frontend Developer (GitHub account: *essoik797*)
++ **Nazerke Nazarkulova** (*180103054*) - Frontend Developer (GitHub account: *jackychan*)
++ **Toty Kabasheva** (*180103083*) - UX/UI Designer (GitHub account: *jackychan*)
 + **Abay Kokenov** (*180103104*) - Backend Developer (GitHub account: *jackychan*)
 
 ## Project
 A multi-user platform where users can chat, debate, hold official meetings, or just relax and spend time with friends while watching movies or listening to music together.
 
 ## Alternatives / Market research
-| Research alternatives
+| Our platform has a modern and user-friendly design, where users can stream and promote their products, and can also gather for a formal meeting. The platform will have several rooms, which the user himself will add and will navigate using the sidebar. On the main page, he can also find recommendations for channels, topics that interest him.
 
 ## Goals
 
 ## Technologies
-In our project we use **Laravel**, **VueJS**
+In our project we use **Figma**, **HTML**, **CSS(SCSS)**, **JavaScript** , **Go**
 
 ## Pages / Activities 
 We will have following pages:
