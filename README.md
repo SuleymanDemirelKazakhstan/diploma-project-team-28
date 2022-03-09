@@ -1,10 +1,13 @@
 # CSS 410 Research tools and methods
 ## Team members
-+ **Jet Lee** (*180100012*)- Backend Developer (GitHub account: *jetlee*)
-+ **Jacky Chan** (*180100013*) - Frontend Developer (GitHub account: *jackychan*)
++ **Nurali Ainabekov** (*180103154*)- Project Manager (GitHub account: *jetlee*)
++ **Azhar Ilyassova** (*180103181*) - Frontend Developer (GitHub account: *jackychan*)
++ **Nazerke Nazarkulova** (*180103181*) - Frontend Developer (GitHub account: *jackychan*)
++ **Toty Kabasheva** (*180103181*) - UX/UI Designer (GitHub account: *jackychan*)
++ **Abay Kokenov** (*180103104*) - Backend Developer (GitHub account: *jackychan*)
 
 ## Project
-This project is yet-another clone of Instagram
+A multi-user platform where users can chat, debate, hold official meetings, or just relax and spend time with friends while watching movies or listening to music together.
 
 ## Alternatives / Market research
 | Research alternatives
