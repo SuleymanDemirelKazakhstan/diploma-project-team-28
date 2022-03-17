@@ -15,7 +15,7 @@ A multi-user platform where users can chat, debate, hold official meetings, or j
 ## Goals
 
 ## Technologies
-In our project we use **Figma**, **HTML**, **CSS(SCSS)**, **JavaScript** , **Go**
+In our project we use **Figma**, **React** , **Go**
 
 ## Pages / Activities 
 We will have following pages:
