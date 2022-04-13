@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 
 class Room {
-  users = [];
+  members = [];
 
   constructor({ name, adminUser }) {
     this.id = crypto.randomUUID();
@@ -10,8 +10,17 @@ class Room {
   }
 
   addUser(user) {
-    this.users.push(user);
+    this.members.push(user);
     user.joinRoom(this.id);
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      adminUser: this.adminUser.toJSON(),
+      members: this.members.map((memeberItem) => memeberItem.toJSON()),
+    };
   }
 }
 

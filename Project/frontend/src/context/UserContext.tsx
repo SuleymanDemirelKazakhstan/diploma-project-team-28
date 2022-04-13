@@ -1,9 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-interface User {
-  name: string;
-  avatar?: string;
-}
+import { User } from "../types";
 
 interface IUserContext {
   user?: User;

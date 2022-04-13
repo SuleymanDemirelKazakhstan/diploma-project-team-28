@@ -8,15 +8,17 @@ const app = new App();
 
 io.on("connection", (socket) => {
   const user = new User({
-    name: socket.handshake.query.userName,
+    name: socket.handshake.query.name,
     socket: socket,
   });
-  app.addUser(user);
-  console.log("connected", user.name, user.socket.id);
 
-  socket.emit("me", user.toJSON());
+  app.addUser(user);
+
+  socket.emit("me:profile:create", user.toJSON());
+  console.log("User connected", user.toJSON());
 
   socket.on("room:create", (data) => {
+    console.log("Create room", data);
     // {
     //   roomName: string
     // }
@@ -26,7 +28,7 @@ io.on("connection", (socket) => {
     app.addRoom(room);
 
     user.socket.join(room.id);
-    user.socket.emit("me:room:join", { roomId: room.id, roomName: room.name });
+    user.socket.emit("me:room:join", room.toJSON());
   });
 
   socket.on("room:join", (data) => {
@@ -36,23 +38,19 @@ io.on("connection", (socket) => {
     const room = app.getRoomById(data.roomId);
 
     if (room) {
-      user.socket.to(room.id).emit("friend:room:join", user.toJSON());
-
       room.addUser(user);
-
-      user.socket.emit("me:room:join", {
-        roomId: room.id,
-        roomName: room.name,
-      });
+      user.socket.join(room.id);
+      user.socket.emit("me:room:join", room.toJSON());
+      user.socket.to(room.id).emit("friend:room:join", user.toJSON());
     }
   });
 
   socket.on("me:move", (data) => {
+    console.dir(user.toJSON());
     // {
     //   x: number,
     //   y: number
     // }
-    console.log(data);
     user.move({ x: data.x, y: data.y });
     user.socket.to(user.joinedRoom).emit("friend:update", user.toJSON());
   });
