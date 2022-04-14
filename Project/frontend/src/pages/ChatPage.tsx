@@ -181,7 +181,8 @@ const ChatPage = () => {
               onMouseDown={onDragStart}
               onMouseUp={onDragEnd}
             >
-              <video id={`video-${me.id}`}></video>
+              {/* <video id={`video-${me.id}`}></video> */}
+              <Heading color="white">{me.name}</Heading>
             </Box>
           )}
 
@@ -194,7 +195,8 @@ const ChatPage = () => {
                 top={`${memberItem.y}px`}
                 left={`${memberItem.x}px`}
               >
-                <video id={`video-${memberItem.id}`}></video>
+                {/* <video id={`video-${memberItem.id}`}></video> */}
+                <Heading color="white">{memberItem.name}</Heading>
               </Box>
             ))}
         </Box>
