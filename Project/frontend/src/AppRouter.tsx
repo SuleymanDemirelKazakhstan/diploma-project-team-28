@@ -1,24 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import { UserContext } from "./context/UserContext";
-
 import MainLayout from "./layouts/MainLayout";
-import ChatPage from "./pages/ChatPage";
-import ChatRoom from "./pages/ChatRoom";
-import LoginPage from "./pages/LoginPage";
+import AuthPage from "./pages/AuthPage";
+import HomePage from "./pages/HomePage";
 
 const AppRouter = () => {
-  const { user } = useContext(UserContext);
-
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<LoginPage />} />
+          <Route index element={<HomePage />} />
 
-          <Route path="r" element={user ? <ChatPage /> : <h1>Loading...</h1>} />
-          <Route path="r/:roomId" element={<ChatPage />} />
+          <Route path="auth" element={<AuthPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

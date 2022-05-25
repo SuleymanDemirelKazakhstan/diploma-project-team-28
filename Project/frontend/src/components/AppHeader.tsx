@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
-import { Flex, Image, Stack, Text } from "@chakra-ui/react";
+import { Avatar, Flex, Image, Stack, Text } from "@chakra-ui/react";
 
 import { UserContext } from "../context/UserContext";
-import AvatarImg from "./avatar.png";
 
 const AppHeader = () => {
   const userContext = useContext(UserContext);
@@ -26,7 +25,11 @@ const AppHeader = () => {
             {userContext.user.name}
           </Text>
 
-          <Image src={AvatarImg} />
+          <Avatar
+            size="md"
+            name={userContext.user.name}
+            src={userContext.user.avatar}
+          />
         </Stack>
       )}
     </Flex>
