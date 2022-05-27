@@ -25,6 +25,7 @@ import React, {
 } from "react";
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { ApiService } from "../api/api.service";
 import { UserContext } from "../context/UserContext";
 import { User } from "../types";
 
@@ -45,19 +46,22 @@ const AuthPage = () => {
 
   const [step, setStep] = useState(AuthPageStep.Pick);
 
-  const onCreateProfile = useCallback((userData: CreateUserData) => {
-    // TODO: upload avatar
-    return userContext
-      .createNewUser(
-        {
-          name: userData.name,
-          avatar: "userData.avatar",
-        },
-        userData.remember
-      )
-      .then(() => {
-        navigate("/");
-      });
+  const onCreateProfile = useCallback(async (userData: CreateUserData) => {
+    let avatarUrl = "";
+    if (userData.avatar) {
+      const avatarUploadRes = await ApiService.UploadAvatar(userData.avatar);
+      avatarUrl = avatarUploadRes.path;
+    }
+
+    await userContext.createNewUser(
+      {
+        name: userData.name,
+        avatar: avatarUrl,
+      },
+      userData.remember
+    );
+
+    navigate("/");
   }, []);
 
   const onSelectUser = useCallback((id: string) => {
