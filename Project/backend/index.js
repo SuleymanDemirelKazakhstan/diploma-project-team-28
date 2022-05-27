@@ -46,6 +46,8 @@ io.on("connection", (socket) => {
       socketId: socket.id,
     };
 
+    console.log("======== JOIN ROOM\n", userData);
+
     // Add new user
     if (ROOMS[data.roomId]) {
       ROOMS[data.roomId].users.push(userData);
@@ -55,18 +57,30 @@ io.on("connection", (socket) => {
 
       socket.emit("room:data", ROOMS[data.roomId]);
     }
-
-    console.log(ROOMS[data.roomId]);
   });
 
   socket.on("me:signal:send", (payload) => {
+    console.log(
+      "======== Sending signal\n",
+      `from ${socket.id} to ${payload.userToSignal}`
+    );
+    /* 
+      {
+        userToSignal: string,
+        signal: signal,
+      }
+    */
     io.to(payload.userToSignal).emit("friend:signal:send", {
       signal: payload.signal,
-      callerID: payload.callerID,
+      callerID: socket.id,
     });
   });
 
   socket.on("me:signal:return", (payload) => {
+    console.log(
+      "======== Returning signal\n",
+      `from ${socket.id} to ${payload.callerID}`
+    );
     io.to(payload.callerID).emit("friend:signal:return", {
       signal: payload.signal,
       id: socket.id,
@@ -114,7 +128,7 @@ app.get("/rooms/:roomId", (req, res) => {
 
   // Check if room exists
   if (ROOMS[roomId]) {
-    return res.status(200).json(ROOM[roomId]);
+    return res.status(200).json(ROOMS[roomId]);
   }
 
   return res.sendStatus(404);

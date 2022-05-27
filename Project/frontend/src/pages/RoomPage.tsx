@@ -62,7 +62,6 @@ const RoomPage = () => {
               peer.on("signal", (signal) => {
                 socketRef.current.emit("me:signal:send", {
                   userToSignal: userItem.socketId,
-                  callerId: socketRef.current.id,
                   signal,
                 });
               });
@@ -78,6 +77,12 @@ const RoomPage = () => {
 
         // When friend calls me
         socketRef.current.on("friend:signal:send", (data) => {
+          /* 
+            {
+              signal: payload.signal,
+              callerID: socket.id,
+            }
+          */
           const peer = new Peer({
             initiator: false,
             trickle: false,
@@ -102,7 +107,15 @@ const RoomPage = () => {
         });
 
         socketRef.current.on("friend:signal:return", (payload) => {
-          const item = friendsRef.current.find((p) => p.peerID === payload.id);
+          /* 
+            {
+              signal: payload.signal,
+              id: socket.id,
+            }
+          */
+          const item = friendsRef.current.find(
+            (u) => u.socketId === payload.id
+          );
           item.peer.signal(payload.signal);
         });
       });
