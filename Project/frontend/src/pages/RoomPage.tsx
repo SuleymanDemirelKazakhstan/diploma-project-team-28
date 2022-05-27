@@ -37,6 +37,24 @@ const RoomPage = () => {
       .then((stream) => {
         userVideoRef.current.srcObject = stream;
 
+        setTimeout(() => {
+          const videoTrack = stream.getVideoTracks()[0];
+          videoTrack.stop();
+          navigator.mediaDevices
+            .getDisplayMedia({
+              video: {
+                width: 100,
+                height: 100,
+              },
+              audio: false,
+            })
+            .then((captureStream) => {
+              const screenVideoTrack = captureStream.getVideoTracks()[0];
+              stream.removeTrack(videoTrack);
+              stream.addTrack(screenVideoTrack);
+            });
+        }, 5000);
+
         // Join room
         socketRef.current.emit("me:room:join", {
           roomId: roomId,
@@ -141,7 +159,7 @@ const Video: React.FC<{ peer: Peer.Instance }> = (props) => {
     });
   }, []);
 
-  return <video playsInline autoPlay ref={ref} />;
+  return <video ref={ref} playsInline autoPlay muted />;
 };
 
 export default RoomPage;
