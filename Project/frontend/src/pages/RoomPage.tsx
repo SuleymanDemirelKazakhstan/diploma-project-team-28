@@ -1,15 +1,9 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
 import { Box } from "@chakra-ui/react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import Peer from "simple-peer";
 import io, { Socket } from "socket.io-client";
 import { UserContext } from "../context/UserContext";
-import Peer from "simple-peer";
 
 const RoomPage = () => {
   const { roomId } = useParams();
@@ -37,23 +31,23 @@ const RoomPage = () => {
       .then((stream) => {
         userVideoRef.current.srcObject = stream;
 
-        setTimeout(() => {
-          const videoTrack = stream.getVideoTracks()[0];
-          videoTrack.stop();
-          navigator.mediaDevices
-            .getDisplayMedia({
-              video: {
-                width: 100,
-                height: 100,
-              },
-              audio: false,
-            })
-            .then((captureStream) => {
-              const screenVideoTrack = captureStream.getVideoTracks()[0];
-              stream.removeTrack(videoTrack);
-              stream.addTrack(screenVideoTrack);
-            });
-        }, 5000);
+        // setTimeout(() => {
+        //   const videoTrack = stream.getVideoTracks()[0];
+        //   videoTrack.stop();
+        //   navigator.mediaDevices
+        //     .getDisplayMedia({
+        //       video: {
+        //         width: 100,
+        //         height: 100,
+        //       },
+        //       audio: false,
+        //     })
+        //     .then((captureStream) => {
+        //       const screenVideoTrack = captureStream.getVideoTracks()[0];
+        //       stream.removeTrack(videoTrack);
+        //       stream.addTrack(screenVideoTrack);
+        //     });
+        // }, 5000);
 
         // Join room
         socketRef.current.emit("me:room:join", {

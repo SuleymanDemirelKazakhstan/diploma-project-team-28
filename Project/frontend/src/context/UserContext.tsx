@@ -1,5 +1,6 @@
 import { useBoolean } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
+import Cookie from "js-cookie";
 
 import { User } from "../types";
 
@@ -46,7 +47,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
           setSavedUsers((prev) => [newUser, ...prev]);
 
           // Set new user as last used
-          localStorage.setItem("last-user-id", id);
+          Cookie.set("last-user-id", id, { expires: 7 });
         }
 
         resolve(newUser);
@@ -83,7 +84,7 @@ export const UserContextProvider: React.FC = ({ children }) => {
       setSavedUsers(savedUsers);
 
       // Get last used user info from saved users
-      const lastUsedUserId = localStorage.getItem("last-user-id");
+      const lastUsedUserId = Cookie.get("last-user-id");
 
       if (lastUsedUserId) {
         const lastUserData = savedUsers.find((u) => u.id === lastUsedUserId);
