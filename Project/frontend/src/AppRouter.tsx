@@ -14,7 +14,7 @@ const AppRouter = () => {
 
           <Route path="auth" element={<AuthPage />} />
 
-          <Route path="r/:roomId" element={<RoomPage />} />
+          <Route path="r" element={<RoomPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

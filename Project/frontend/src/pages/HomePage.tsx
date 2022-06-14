@@ -56,15 +56,16 @@ const RoomCreateComponent: React.FC<{ onReturnClick: () => any }> = (props) => {
   const [title, setTitle] = useState("");
 
   const onCreateRoom: React.FormEventHandler = useCallback(
-    async (e) => {
+    (e) => {
       e.preventDefault();
 
-      await ApiService.CreateRoom({
-        id: roomId,
-        title: title,
-      });
-
-      navigate(`/r/${roomId}`);
+      return ApiService.СreateRoom({ name: title })
+        .then((roomData: any) => {
+          navigate(`/r?roomUrl=${roomData.url}`);
+        })
+        .catch((error) => {
+          console.log("Error creating room", error);
+        });
     },
     [title, roomId]
   );
@@ -143,6 +144,16 @@ const RoomCreateComponent: React.FC<{ onReturnClick: () => any }> = (props) => {
 const RoomJoinComponent: React.FC<{ onCreateRoomClick: () => any }> = (
   props
 ) => {
+  const navigate = useNavigate();
+  const [roomName, setRoomName] = useState("");
+
+  const onJoinRoom = useCallback(
+    (roomName) => {
+      navigate(`/r?roomUrl=https://diplomka.daily.co/${roomName}`);
+    },
+    [roomName]
+  );
+
   return (
     <Box backgroundColor="#283045" borderRadius="xl" width="450px">
       <Center padding="24px" borderBottom="1px solid #3B4253">
@@ -158,8 +169,17 @@ const RoomJoinComponent: React.FC<{ onCreateRoomClick: () => any }> = (
         </Text>
 
         <Stack direction="row">
-          <Input color="white" flex="1" />
-          <Button colorScheme="purple" variant="outline">
+          <Input
+            color="white"
+            flex="1"
+            value={roomName}
+            onChange={(e) => setRoomName(e.target.value)}
+          />
+          <Button
+            colorScheme="purple"
+            variant="outline"
+            onClick={() => onJoinRoom(roomName)}
+          >
             Присоединиться по ID
           </Button>
         </Stack>
